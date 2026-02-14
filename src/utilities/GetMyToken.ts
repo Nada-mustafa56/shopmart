@@ -1,23 +1,28 @@
-'use server'
-import { decode } from "next-auth/jwt";
-import { cookies } from "next/headers";
+
+import { jwtVerify } from "jose";
 
 export default async function getMyToken() {
-  const data = await cookies();
-  const encryptedToken = data.get('next-auth.session-token') || data.get('__Secure-next-auth.session-token');
+  const encryptedToken = {
+    value: "login"
+  };
 
-  if (!encryptedToken) {
-return null;
+  if (!encryptedToken?.value) {
+    throw new Error("No token found");
   }
 
-  const token = await decode({ 
-    token: encryptedToken?.value, 
-    secret: process.env.AUTH_SECRET! 
-  });
-
-  if (!token?.token) {
-    throw new Error("Login to add to cart");
+  if (!process.env.AUTH_SECRET) {
+    throw new Error("NEXTAUTH_SECRET not defined in env");
   }
+  const secretKey = new TextEncoder().encode(process.env.NEXTAUTH_SECRET);
 
-  return token?.token;
+  try {
+  
+    const { payload } = await jwtVerify(encryptedToken.value, secretKey);
+
+    
+    return payload;
+  } catch (error) {
+    console.error("Token verification failed:", error);
+    return null;
+  }
 }

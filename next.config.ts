@@ -1,9 +1,16 @@
-import type { NextConfig } from "next";
+
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: ["ecommerce.routemisr.com"], // هنا حطي أي دومين خارجي هتستخدميه للصور
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ecommerce.routemisr.com",
+        port: "",      
+        pathname: "/**",   
+      },
+    ],
   },
 };
 

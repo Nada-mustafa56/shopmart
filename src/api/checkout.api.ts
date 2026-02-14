@@ -20,7 +20,7 @@ export async function makeOnlinePayment(cartId: string, domain: string, formValu
 }
 export async function makeCashPayment(cartId: string, formValues: CheckoutType) {
   const token = await getMyToken();
-  const response = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/${cartId}`, {
+  const response = await fetch(`https://ecommerce.routemisr.com/api/v2/orders/${cartId}`, {
    method :'POST',
     headers: {
      token :`${token}`,

@@ -4,12 +4,7 @@ import React from 'react'
 import CategoryCarousel from '../CategoryCarousel/CategoryCarousel';
 
 export default async function CategorySlider() {
-  
-
-
     const getAllCategoriesData:CategoryType[] = await getAllCategories(); 
-
-  
     return (
     <>
         <section className="container mx-auto px-4 py-8">

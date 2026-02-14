@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,10 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
-import { useRouter } from "next/navigation"; // ✅ استدعاء الراوتر
+import { useRouter } from "next/navigation"; 
 import Link from "next/link";
-
-// ✅ Validation schema with Zod
 const registerSchema = z
   .object({
     name: z
@@ -70,24 +68,25 @@ export default function RegisterPage() {
       );
 
       const data = await res.json();
-      console.log("✅ Register Response:", data);
+      console.log("Register Response:", data);
 
       if (res.ok) {
-        toast.success("Account created successfully 🎉");
+        toast.success("Account created successfully");
         form.reset();
         router.push("/login");
       } else {
-        toast.error(data.message || "Something went wrong ❌");
+        toast.error(data.message || "Something went wrong, please try again");
       }
     } catch (err) {
-      console.error("❌ Register Error:", err);
-      toast.error("Network error, please try again later ⚠️");
+      console.error("Register Error:", err);
+      toast.error("Network error, please try again later");
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
@@ -98,7 +97,6 @@ export default function RegisterPage() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {/* Name */}
               <FormField
                 control={form.control}
                 name="name"
@@ -113,7 +111,6 @@ export default function RegisterPage() {
                 )}
               />
 
-              {/* Email */}
               <FormField
                 control={form.control}
                 name="email"
@@ -131,8 +128,6 @@ export default function RegisterPage() {
                   </FormItem>
                 )}
               />
-
-              {/* Password */}
               <FormField
                 control={form.control}
                 name="password"
@@ -164,13 +159,12 @@ export default function RegisterPage() {
                 )}
               />
 
-              {/* Re-Password */}
               <FormField
                 control={form.control}
                 name="rePassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>rePassword</FormLabel>
                     <div className="relative">
                       <FormControl>
                         <Input
@@ -195,8 +189,6 @@ export default function RegisterPage() {
                   </FormItem>
                 )}
               />
-
-              {/* Phone */}
               <FormField
                 control={form.control}
                 name="phone"
@@ -210,16 +202,14 @@ export default function RegisterPage() {
                   </FormItem>
                 )}
               />
-
-              {/* Submit Button */}
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-black cursor-pointer text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? "Creating account..." : "Sign Up"}
               </Button>
-              <Link href="/login" className="text-sm text-green-500 hover:underline mt-1 block text-center">
+              <Link href="/login" className="text-sm text-red-500 hover:underline mt-1 block text-center">
                 Already have an account? Login
               </Link>
             </form>
@@ -227,5 +217,6 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </div>
-  );
+    </>
+  )
 }

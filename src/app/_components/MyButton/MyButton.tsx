@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import addProductToCart from '@/api/cart.api';
 import { Button } from '@/components/ui/button'
@@ -28,17 +28,17 @@ export default function MyButton({ id }: { id: string }) {
 
         cart.setNumOfCartItems(sum);
       } else {
-        toast.error("Can't add product to cart You must login first❗", { position: 'top-center', duration: 2000 });
+        toast.error("Can't add product to cart You must login first", { position: 'top-center', duration: 2000 });
         router.push("/login");
       }
     } catch (error: unknown) {
        const err = error as { message?: string };
 
       if (err?.message === "Login to add to cart") {
-        toast.error("You must login first ❌", { position: 'top-center', duration: 2000 });
+        toast.error("You must login first ", { position: 'top-center', duration: 2000 });
         router.push("/login");
       } else {
-        toast.error(err?.message || "Something went wrong ❌", { position: 'top-center', duration: 2000 });
+        toast.error(err?.message || "Something went wrong please try again", { position: 'top-center', duration: 2000 });
       }
     } finally {
       setIsLoading(false);

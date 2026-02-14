@@ -1,5 +1,6 @@
-'use client';
+'use client'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import Image from 'next/image';
 import { CategoryType } from '@/types/products.type';
@@ -10,15 +11,18 @@ export default function CategoryCarousel({
   getAllCategoriesData: CategoryType[];
 }) {
   return (
+    <>
     <div className="w-full py-6">
       <Swiper
+        modules={[Autoplay]} 
         slidesPerView={2}
         spaceBetween={16}
+        loop={true}
+        speed={800}
         autoplay={{
-          delay: 2500,
+          delay: 1200,
           disableOnInteraction: false,
         }}
-        loop
         breakpoints={{
           480: { slidesPerView: 3 },
           768: { slidesPerView: 4 },
@@ -28,7 +32,6 @@ export default function CategoryCarousel({
         {getAllCategoriesData.map((category) => (
           <SwiperSlide key={category._id}>
             <div className="group cursor-pointer">
-        
               <div className="relative w-full h-56 md:h-72 rounded-lg overflow-hidden shadow-md group-hover:shadow-lg transition">
                 <Image
                   src={category.image}
@@ -36,10 +39,8 @@ export default function CategoryCarousel({
                   fill
                   className="object-contain bg-white group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
-
-         
-              <p className="mt-2 text-center text-sm md:text-base font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+              </div>         
+              <p className="mt-2 text-center text-sm md:text-base font-medium text-black group-hover:text-red-600 transition-colors">
                 {category.name}
               </p>
             </div>
@@ -47,5 +48,6 @@ export default function CategoryCarousel({
         ))}
       </Swiper>
     </div>
-  );
+    </>
+  )
 }

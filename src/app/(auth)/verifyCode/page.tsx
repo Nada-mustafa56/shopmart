@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,24 +50,25 @@ const router = useRouter();
       );
 
       const result = await res.json();
-      console.log("🔍 Verify Code Response:", result);
+      console.log(" Verify Code Response:", result);
 
       if (!res.ok) {
-        toast.error(result.message || "Invalid reset code ❌");
+        toast.error(result.message || "Invalid reset code ");
         return;
       }
 
-      toast.success("Code verified successfully ✅");
+      toast.success("Code verified successfully ");
       router.push('/resetPassword')
     } catch (error) {
-      console.error("❌ Verify Code Error:", error);
-      toast.error("Network error, please try again later ⚠️");
+      console.error(" Verify Code Error:", error);
+      toast.error("Network error, please try again later ");
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
@@ -78,7 +79,6 @@ const router = useRouter();
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              {/* Reset Code */}
               <FormField
                 control={form.control}
                 name="resetCode"
@@ -109,5 +109,6 @@ const router = useRouter();
         </CardContent>
       </Card>
     </div>
-  );
+    </>
+  )
 }

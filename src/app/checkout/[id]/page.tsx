@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -53,10 +53,8 @@ export default function CheckoutForm({ onOnline, onCash }: Props) {
     formState: { isSubmitting },
   } = form;
 
-  // رابط الدفع يكون ديناميكي حسب الموقع
-  const redirectUrl = window.location.origin; // https://mydomain.com تلقائي
+  const redirectUrl = window.location.origin; 
 
-  // اسم الدالة اتغير لـ payOnline
   const payOnline = handleSubmit(async (values) => {
     if (onOnline) await onOnline(values);
     else {
@@ -87,6 +85,7 @@ export default function CheckoutForm({ onOnline, onCash }: Props) {
   });
 
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-bold mb-2">Checkout</h2>
@@ -165,5 +164,6 @@ export default function CheckoutForm({ onOnline, onCash }: Props) {
         </Form>
       </div>
     </div>
-  );
+    </>
+  )
 }

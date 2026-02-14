@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,17 +48,17 @@ export default function ForgotPasswordPage() {
       const result = await res.json();
 
       if (!res.ok) {
-        throw new Error(result.message || "Request failed ❌");
+        throw new Error(result.message || "Request failed ");
       }
 
-      toast.success("Reset link sent to your email ✅");
+      toast.success("Reset link sent to your email ");
       router.push('/verifyCode');
       
     } catch (error: unknown) {
   if (error instanceof Error) {
     toast.error(error.message);
   } else {
-    toast.error("Something went wrong ❌");
+    toast.error("Something went wrong please try again");
   }
 }
  finally {
@@ -68,12 +67,12 @@ export default function ForgotPasswordPage() {
   };
 
   return (
+    <>
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-            {/* Email */}
             <FormField
               control={form.control}
               name="email"
@@ -91,7 +90,6 @@ export default function ForgotPasswordPage() {
               )}
             />
 
-            {/* Submit Button */}
             <Button
               type="submit"
               disabled={loading}
@@ -103,5 +101,6 @@ export default function ForgotPasswordPage() {
         </Form>
       </div>
     </div>
-  );
+    </>
+  )
 }

@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -46,25 +46,25 @@ export default function ResetPasswordPage() {
       console.log("Reset Password Response:", result);
 
       if (res.ok) {
-        toast.success("Password reset successfully ✅");
+        toast.success("Password reset successfully ");
         router.push("/login");
       } else {
-        toast.error(result.message || "Failed to reset password ❌");
+        toast.error(result.message || "Failed to reset password ");
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Something went wrong ❌");
+      toast.error("Something went wrong ");
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
     <div className="max-w-md mx-auto mt-12 p-6 bg-white rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Reset Password</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email */}
           <FormField
             control={form.control}
             name="email"
@@ -78,8 +78,6 @@ export default function ResetPasswordPage() {
               </FormItem>
             )}
           />
-
-          {/* New Password */}
           <FormField
             control={form.control}
             name="newPassword"
@@ -93,8 +91,6 @@ export default function ResetPasswordPage() {
               </FormItem>
             )}
           />
-
-          {/* Submit Button */}
           <Button
             type="submit"
             className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold py-2 rounded-lg shadow-md hover:opacity-90 transition"
@@ -105,5 +101,6 @@ export default function ResetPasswordPage() {
         </form>
       </Form>
     </div>
-  );
+    </>
+  )
 }

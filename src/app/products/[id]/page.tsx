@@ -15,6 +15,7 @@ export default async function page({ params }: { params: Promise<{id : string}> 
 
 
  return (
+  <>
     <div className="container mx-auto px-6 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <ProductDetails product={product} />
@@ -24,5 +25,6 @@ export default async function page({ params }: { params: Promise<{id : string}> 
          
           </div>
     </div>
-  );
+    </>
+  )
 }

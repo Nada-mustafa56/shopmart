@@ -1,6 +1,6 @@
-"use client"
-
+'use client'
 import addProductToCart from '@/api/cart.api';
+import { Button } from '@/components/ui/button';
 import { CartContext, CartContextType } from '@/context/cart.context';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react'
@@ -28,16 +28,16 @@ const [isLoading , setisLoading] = useState(false);
 
         cart.setNumOfCartItems(sum);
       } else {
-        toast.error("Can't add product to cart ❌", { position: 'top-center', duration: 2000 });
+        toast.error("Can't add product to cart ", { position: 'top-center', duration: 2000 });
       }
     } catch (error: unknown) {
        const err = error as { message?: string };
 
       if (err?.message === "Login to add to cart") {
-        toast.error("You must login first ❌", { position: 'top-center', duration: 2000 });
+        toast.error("You must login first ", { position: 'top-center', duration: 2000 });
         router.push("/login");
       } else {
-        toast.error(err?.message || "Something went wrong ❌", { position: 'top-center', duration: 2000 });
+        toast.error(err?.message || "Something went wrong please try again", { position: 'top-center', duration: 2000 });
       }
     } finally {
       setisLoading(false);
@@ -45,9 +45,9 @@ const [isLoading , setisLoading] = useState(false);
   }
     return (
     <>
-      <button disabled ={isLoading} onClick={handelAdd} className="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
+      <Button disabled ={isLoading} onClick={handelAdd} className="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
                     <i className="fa-solid fa-cart-plus mr-2"></i> Add to Cart
-                  </button> 
+                  </Button> 
     </>
   )
 }

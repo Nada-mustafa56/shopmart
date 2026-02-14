@@ -1,6 +1,4 @@
-"use client";
-
-// import { useState } from "react";
+'use client'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -15,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {signIn} from 'next-auth/react'
 const formSchema = z.object({
@@ -26,9 +23,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
-  // const [loading, setLoading] = useState(false);
-  // const router = useRouter();
-
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,43 +54,14 @@ if (response?.ok) {
   });
 }
 
-    // try {
-    //   setLoading(true);
-    //   const res = await fetch(
-    //     "https://ecommerce.routemisr.com/api/v1/auth/signin",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(data),
-    //     }
-    //   );
-
-    //   const result = await res.json();
-
-    //   if (!res.ok) {
-    //     throw new Error(result.message || "Login failed ❌");
-    //   }
-
-    //   toast.success("Logged in successfully ✅");
-
-    //   localStorage.setItem("token", result.token);
-
-    //   router.push("/");
-    // } catch (error: any) {
-    //   toast.error(error.message || "Login failed ❌");
-    // } finally {
-    //   setLoading(false);
-    // }
   };
 
   return (
+    <>
     <div className="max-w-md mx-auto mt-12 p-6 bg-white rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email */}
           <FormField
             control={form.control}
             name="email"
@@ -110,8 +75,6 @@ if (response?.ok) {
               </FormItem>
             )}
           />
-
-          {/* Password */}
           <FormField
             control={form.control}
             name="password"
@@ -132,7 +95,7 @@ if (response?.ok) {
 
           <Button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full bg-black cursor-pointer text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
           >
             Login
           </Button>
@@ -147,7 +110,7 @@ if (response?.ok) {
 
             <Link
               href="/register"
-              className="text-sm text-green-500 hover:underline mt-3 block text-center"
+              className="text-sm text-red-600 hover:underline mt-3 block text-center"
             >
               Dont have an account? Register
             </Link>
@@ -155,5 +118,6 @@ if (response?.ok) {
         </form>
       </Form>
     </div>
-  );
+    </>
+  )
 }

@@ -1,28 +1,27 @@
-"use client";
+'use client'
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules"; 
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { ProdctsType } from "@/types/products.type";
 import Product from "../Product/Product";
 
-
-
-export default function ProductSwiper({relatedProducts}:{relatedProducts:ProdctsType[]}) {
+export default function ProductSwiper({ relatedProducts }: { relatedProducts: ProdctsType[] }) {
   return (
+    <>
     <div className="mt-10">
       <h1 className="text-2xl font-semibold mb-6 text-gray-800">
         Related Products
       </h1>
 
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Autoplay]}
         spaceBetween={20}
         slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 1000,          
+          disableOnInteraction: false, 
+        }}
         breakpoints={{
           640: { slidesPerView: 2, spaceBetween: 20 },
           768: { slidesPerView: 3, spaceBetween: 25 },
@@ -39,5 +38,6 @@ export default function ProductSwiper({relatedProducts}:{relatedProducts:Prodcts
         ))}
       </Swiper>
     </div>
-  );
+    </>
+  )
 }

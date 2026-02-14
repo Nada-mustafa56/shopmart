@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import { getProductsFromCart } from '@/api/cart.api';
 import { CartType } from '@/types/cart.type';
 import { createContext, useEffect, useState, ReactNode } from 'react';
@@ -17,14 +16,11 @@ export type OrderType = {
 };
 
 export type CartContextType = {
-  // Cart
   numOfCartItems: number | null;
   setNumOfCartItems: React.Dispatch<React.SetStateAction<number | null>>;
   handleCart: () => Promise<CartType | undefined>;
   cartId: string | null;
   setCartId: React.Dispatch<React.SetStateAction<string | null>>;
-
-  // Orders
   currentOrder: OrderType | null;
   setCurrentOrder: React.Dispatch<React.SetStateAction<OrderType | null>>;
   fetchOrder: (orderId: string, token: string) => Promise<OrderType | null>;
@@ -39,11 +35,8 @@ type CartProviderProps = {
 export default function CartProvider({ children }: CartProviderProps) {
   const [numOfCartItems, setNumOfCartItems] = useState<number | null>(null);
   const [cartId, setCartId] = useState<string | null>(null);
-
-  // Orders
   const [currentOrder, setCurrentOrder] = useState<OrderType | null>(null);
 
-  // ✅ handleCart
   async function handleCart(): Promise<CartType | undefined> {
     const data = await getProductsFromCart();
     if (!data) return undefined;
@@ -53,21 +46,18 @@ export default function CartProvider({ children }: CartProviderProps) {
       sum += product.count;
     });
     setNumOfCartItems(sum);
+    if (data?.data?._id) setCartId(data.data._id);
 
     return data as CartType;
   }
 
-  // ✅ fetchOrder
   async function fetchOrder(orderId: string, token: string): Promise<OrderType | null> {
     try {
       const res = await fetch(
         `https://ecommerce.routemisr.com/api/v1/orders/${orderId}`,
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            token: token, // ✅ حسب السيرفر
-          },
+          headers: { "Content-Type": "application/json", token },
         }
       );
 
@@ -101,5 +91,5 @@ export default function CartProvider({ children }: CartProviderProps) {
     >
       {children}
     </CartContext.Provider>
-  );
+  )
 }
